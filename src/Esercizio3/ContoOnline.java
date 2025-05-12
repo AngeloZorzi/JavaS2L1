@@ -1,9 +1,9 @@
 package Esercizio3;
 
-public class ContoOnLine extends ContoCorrente {
+public class ContoOnline extends ContoCorrente {
     private double maxPrelievo;
 
-    public ContoOnLine(String titolare, double saldo, double maxP) {
+    public ContoOnline(String titolare, double saldo, double maxP) {
         super(titolare, saldo);
         this.maxPrelievo = maxP;
     }
@@ -13,9 +13,11 @@ public class ContoOnLine extends ContoCorrente {
                 + " - Massimo movimenti: " + maxMovimenti + " - Massimo prelievo possibile: " + maxPrelievo);
     }
 
-    public void preleva(double x) {
-        if (x <= maxPrelievo) {
-            super.preleva(x);
+    @Override
+    public void preleva(double x) throws BankException {
+        if (x > maxPrelievo) {
+            throw new BankException("il prelievo non è disponibile");
         }
+        super.preleva(x);
     }
 }
